@@ -1,7 +1,10 @@
 package org.gujavasc.resources;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -22,11 +25,16 @@ public class MemberResource {
 	@Inject
 	private MemberService memberService;
 
-	@GET
-	public Member getMemberStatus(){
+	@POST
+	public Member save(){
 		Member member = Member.builder().id(1L).name("Marcos").build();
 		memberService.save(member);
 		return member;
+	}
+	
+	@GET
+	public List<Member> list(){
+		return memberService.list();
 	}
 	
 }
