@@ -12,7 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.gujavasc.entities.User;
-import org.jugavasc.services.UserService;
+import org.gujavasc.services.UserService;
 
 @Path("user")
 @Produces(APPLICATION_JSON)

@@ -1,4 +1,4 @@
-package org.jugavasc.services;
+package org.gujavasc.services;
 
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;

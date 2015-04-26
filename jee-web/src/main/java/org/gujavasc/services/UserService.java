@@ -1,4 +1,4 @@
-package org.jugavasc.services;
+package org.gujavasc.services;
 
 import java.util.List;
 
