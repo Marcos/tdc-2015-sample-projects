@@ -9,10 +9,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.gujavasc.entities.User;
 import org.gujavasc.services.UserService;
+import org.gujavasc.services.exception.UserNotFoundException;
 
 @Path("user")
 @Produces(APPLICATION_JSON)
@@ -30,6 +32,12 @@ public class UserResource {
 	@GET
 	public List<User> list(){
 		return userService.list();
+	}
+	
+	@GET
+	@Path("{email}")
+	public User find(@PathParam("email") String email) throws UserNotFoundException{
+		return userService.find(email);
 	}
 	
 	@GET

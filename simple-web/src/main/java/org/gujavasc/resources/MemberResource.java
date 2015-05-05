@@ -15,19 +15,21 @@ import lombok.NoArgsConstructor;
 import org.gujavasc.business.MemberService;
 import org.gujavasc.entities.Member;
 
-@Path("members")
+@Path("member")
 
 @Produces(MediaType.APPLICATION_JSON)
 @AllArgsConstructor(onConstructor=@__(@Inject))
 @NoArgsConstructor
 public class MemberResource {
 	
-	@Inject
 	private MemberService memberService;
 
 	@POST
 	public Member save(){
-		Member member = Member.builder().id(1L).name("Marcos").build();
+		Member member = Member.builder()
+						.id(1L)
+						.name("Marcos")
+						.build();
 		memberService.save(member);
 		return member;
 	}

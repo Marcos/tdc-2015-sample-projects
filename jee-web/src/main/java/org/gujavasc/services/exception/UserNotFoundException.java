@@ -1,0 +1,11 @@
+package org.gujavasc.services.exception;
+
+public class UserNotFoundException extends Exception {
+
+	private static final long serialVersionUID = -7964084330489908041L;
+	
+	public UserNotFoundException() {
+		super("Usuário não encontrado");
+	}
+
+}

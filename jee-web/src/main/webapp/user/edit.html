@@ -34,6 +34,9 @@
 				    success: function(data) { 
 				    	console.log(data); 
 			    	},
+			    	error: function(e) { 
+				    	console.log(e.message); 
+			    	},
 				    contentType: "application/json",
 				    dataType: 'json'
 				});

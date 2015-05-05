@@ -28,7 +28,13 @@ public class MemberService {
 	}
 
 	public List<Member> list() {
-		JPAQuery query = new JPAQuery(entityManager);
+		JPAQuery query = createQuery();
 		return query.from(member).list(member);
 	}
+
+	private JPAQuery createQuery() {
+		return new JPAQuery(entityManager);
+	}
+	
+
 }

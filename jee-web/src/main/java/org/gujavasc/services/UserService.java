@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.gujavasc.entities.User;
+import org.gujavasc.services.exception.UserNotFoundException;
 
 @Stateless
 public class UserService {
@@ -53,6 +54,22 @@ public class UserService {
 			return results.get(0);
 		return null;
 	}
+	
+	public User findByEmail(String email) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+		Root<User> user = criteriaQuery.from(User.class);
+		criteriaQuery.select(user);
+		criteriaQuery.where(criteriaBuilder.equal(user.get("email"),
+				criteriaBuilder.parameter(String.class, "email")));
+
+		TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+		query.setParameter("email", email);
+		List<User> results = query.getResultList();
+		if (!results.isEmpty())
+			return results.get(0);
+		return null;
+	}
 
 	public List<User> list() {
 		CriteriaQuery<User> criteriaQuery = entityManager
@@ -60,6 +77,22 @@ public class UserService {
 				.createQuery(User.class);
 		criteriaQuery.from(User.class);
 		return entityManager.createQuery(criteriaQuery).getResultList();
+	}
+
+	public User find(String email) throws UserNotFoundException {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+		Root<User> user = criteriaQuery.from(User.class);
+		criteriaQuery.select(user);
+		criteriaQuery.where(criteriaBuilder.equal(user.get("email"),
+				criteriaBuilder.parameter(String.class, "email")));
+
+		TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+		query.setParameter("email", email);
+		List<User> results = query.getResultList();
+		if (!results.isEmpty())
+			return results.get(0);
+		 throw new UserNotFoundException();
 	}
 
 }
