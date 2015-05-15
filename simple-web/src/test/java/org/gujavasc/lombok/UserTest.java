@@ -10,6 +10,7 @@ public class UserTest {
 	@Test
 	public void testBuilder(){
 		User user = User.builder()
+						.id(10L)
 						.age(25)
 						.email("marcos.wp@gmail.com")
 						.name("Marcos")
