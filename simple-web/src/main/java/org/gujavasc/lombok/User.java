@@ -1,7 +1,12 @@
 package org.gujavasc.lombok;
 
-public class User {
+import java.io.Serializable;
 
+
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 4196328422875474978L;
+	
 	private Long id;
 	private String name;
 	private String email;
@@ -50,7 +55,6 @@ public class User {
 		this.age = age;
 	}
 
-	// builder
 	public static User builder() {
 		return new User();
 	}
