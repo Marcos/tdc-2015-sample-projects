@@ -4,6 +4,7 @@ import static org.gujavasc.entities.QMember.member;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import org.gujavasc.entities.Member;
+import org.gujavasc.query.QueryFactory;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -20,16 +22,15 @@ import com.mysema.query.jpa.impl.JPAQuery;
 @AllArgsConstructor
 public class MemberService {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+	@Inject
+	private QueryFactory queryFactory;
 	
 	public void save(Member member){
-		entityManager.persist(member);
+		queryFactory.persist(member);
 	}
 
 	public List<Member> list() {
-		JPAQuery query = new JPAQuery(entityManager);
-		return query.from(member).list(member);
+		return queryFactory.from(member).list(member);
 	}	
 
 }
